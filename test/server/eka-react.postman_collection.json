@@ -1,0 +1,572 @@
+{
+	"info": {
+		"_postman_id": "99a64fd1-88ef-47c6-9609-8785349e2883",
+		"name": "eka-react",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "87d613389ae94f0f0386fcb49f016e6g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\tEmail: \"saleksey67@gmail.com\", \n\tPassword: \"124\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/Users/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\tUsername: \"Ivan Kalinin\",\n\tPassword: \"124\",\n\tEmail: \"i@alekseysavin.com\"\n}\t\t"
+				},
+				"url": {
+					"raw": "http://localhost:5000/Users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\tUsername: \"Igor Melnikov\",\n\tPassword: \"124\",\n\tEmail: \"saleksey67@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/Users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA5NTM3NDEsImV4cCI6MTU2MTU1ODU0MSwiaWF0IjoxNTYwOTUzNzQxfQ.kXdRCvvPXCK8QwIaByqF_ovyVyuXKhrfLxRbzezAP9I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/Users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NTk0NzA5MzIsImV4cCI6MTU2MDA3NTczMiwiaWF0IjoxNTU5NDcwOTMyfQ.IxhJTPktqs-nQ9bMARkL70bc5sxNXxpqeLDSDG9W94c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"username\": \"xsa24\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NTkyNDkzNTUsImV4cCI6MTU1OTg1NDE1NSwiaWF0IjoxNTU5MjQ5MzU1fQ.SAnpxT_blqEk9h_8AnkLkjOyUmxFVmya_V121rSLoNk\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/Users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction/Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjAyNjIyMTAsImV4cCI6MTU2MDg2NzAxMCwiaWF0IjoxNTYwMjYyMjEwfQ.FmYKx2Z0C8hGjjfY4T6CaZ3f7si57-7K9jgp-Uc0znY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/Transactions/create?fromId=1&toId=2&state=true&account=0&amount=500.5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Transactions",
+						"create"
+					],
+					"query": [
+						{
+							"key": "fromId",
+							"value": "1"
+						},
+						{
+							"key": "toId",
+							"value": "2"
+						},
+						{
+							"key": "state",
+							"value": "true"
+						},
+						{
+							"key": "account",
+							"value": "0"
+						},
+						{
+							"key": "amount",
+							"value": "500.5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contact_name\": \"Scott\",\n    \"company_name\": \"HP\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/Transactions/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Transactions",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/Transactions/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Transactions",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/Transactions/Get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Transactions",
+						"Get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions User id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/Transactions/GetTransactionsByUser/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Transactions",
+						"GetTransactionsByUser",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Balance",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA5ODM2NTYsImV4cCI6MTU2MTU4ODQ1NiwiaWF0IjoxNTYwOTgzNjU2fQ.v7khDAF-XO3-Vfn-qoyYsBTahW4eCcPSPTgT5VIcxxE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/users/getBalance/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"getBalance",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reset password",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Users/resetPassword?email=saleksey67@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Users",
+						"resetPassword"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "saleksey67@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Users/verifyEmail?email=123@123.ru",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Users",
+						"verifyEmail"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "123@123.ru"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/Transactions/CheckTransaction",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\tuserId: \"1\",\n\tamount: 555.50\n}\t\t"
+				},
+				"url": {
+					"raw": "http://localhost:5000/Transactions/CheckTransaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Transactions",
+						"CheckTransaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIiLCJuYmYiOjE1NjE0MTQ0NTQsImV4cCI6MTU2MjAxOTI1NCwiaWF0IjoxNTYxNDE0NDU0fQ.UApXRr7OnpFO0HAFUTxSIWjmT2rOCHkn0CSUYzGPQnA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\tEmail: \"123@123\",\n\tPassword: \"12345\",\n\tUsername: \"xsa1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/Users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkCode",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjE0NjQ3OTgsImV4cCI6MTU2MjA2OTU5OCwiaWF0IjoxNTYxNDY0Nzk4fQ.pzsWciZcCmIjha-afGO4yw4CS2UxLq4B-KVU9MuAhcA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Users/verifyEmailCode?code=RQB1&userid=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Users",
+						"verifyEmailCode"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "RQB1"
+						},
+						{
+							"key": "userid",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
