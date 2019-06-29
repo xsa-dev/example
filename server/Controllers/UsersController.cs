@@ -158,11 +158,16 @@ namespace WebApi.Controllers {
         [HttpGet ("verifyEmailCode")]
         public IActionResult verifyEmailCode (string code, int userid) {
             var user = _userService.GetAll ().ToList ().Where (x => x.Id == userid).FirstOrDefault ();
+
             if (user == null) {
                 return BadRequest ("User not found.");
             }
 
-            return Ok (_userService.checkVerificationCode (code, user));
+            var selected_user = _userService.checkVerificationCode (code, user);
+            selected_user.PasswordHash = null;
+            selected_user.PasswordSalt = null;
+
+            return Ok (selected_user);
         }
     }
 }

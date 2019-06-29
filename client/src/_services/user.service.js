@@ -118,13 +118,23 @@ function verifyCodeForUser(code, userId) {
         headers: authHeader()
     };
 
-    return fetch(config.apiUrl + '/Users/verifyEmailCode?code=' + code + '&userid=' + userId, requestOptions).then(handleResponse, handleError);
+    return fetch(config.apiUrl + '/Users/verifyEmailCode?code=' + code + '&userid=' + userId, requestOptions)
+        .then(handleResponse, handleError)
+        .then(user => {
+
+            if (user && user.isVerified) {         
+                let old_user = JSON.parse(localStorage.getItem('user'));
+                old_user.isVerified = user.isVerified;                
+                localStorage.setItem('user', JSON.stringify(old_user));
+            }
+
+            return user;
+        });
 }
 
 function handleResponse(response) {
     return new Promise((resolve, reject) => {
         if (response.ok) {
-            // return json if it was returned in the response
             var contentType = response.headers.get("content-type");
             if (contentType && contentType.includes("application/json")) {
                 response.json().then(json => resolve(json));
@@ -132,7 +142,6 @@ function handleResponse(response) {
                 resolve();
             }
         } else {
-            // return error message from response body
             response.text().then(text => reject(text));
         }
     });
