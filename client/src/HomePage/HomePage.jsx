@@ -47,6 +47,9 @@ class HomePage extends React.Component {
     handleTransactionCheckBalance() {
         const { user } = this.props;
         const { amount } = this.state;
+        if (user.id == 'undefined') {
+            return;
+        }
         transactionService.checkTransactionBalance(user.id, amount)
             .then(
                 (check) => {
@@ -100,13 +103,13 @@ class HomePage extends React.Component {
                 <div className="form-group">
                     <label>To</label>     
                     <Typeahead
-                        options={options} 
+                        options={options}
                         placeholder="Choose a user..."
-                        value={to}                        
-                        labelKey="username"
+                        value={to}
+                        labelKey="label"
                         key="id"
                         id="id"
-                        filterBy={["label", "username"]}
+                        filterBy={["label"]}                        
                         onChange={
                             (selected) => {
                             this.handleChangeChangeTo(selected)
