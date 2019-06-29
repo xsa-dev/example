@@ -38,30 +38,26 @@ namespace WebApi.Controllers {
             _hubContext = hubContext;
         }
 
-        [AllowAnonymous]
-        [HttpPost ("create")]
-        public IActionResult Create (int fromId, int toId, bool state, Account account, decimal amount) {
-            // todo balance check this !!!
-            // Response.StatusCode = 500;
-            // return Json (new { error = "Check balance!" });
-            var current_balance = _userService.getBalanceForUser(fromId);
-            var plan_balance = current_balance - amount;
+        [HttpPost("create")]
+        public IActionResult Create([FromBody] Transaction transaction)
+        { 
+            var current_balance = _userService.getBalanceForUser(transaction.fromId);
+            var plan_balance = current_balance - transaction.amount;
             if (plan_balance < 0) {
                 return BadRequest("Not valid amount");
             }
 
-            var created = _transactionService.Create (fromId, toId, state, account, amount);
+            var created = _transactionService.Create (transaction.fromId, transaction.toId, transaction.isValidated, transaction.account, transaction.amount);
 
-            var user = _userService.GetById (fromId);
+            var user = _userService.GetById (transaction.fromId);
 
-            var balance = _userService.getBalanceForUser (fromId);
+            var balance = _userService.getBalanceForUser (transaction.fromId);
 
             _hubContext.Clients.All.SendAsync ("ReceiveMessage", user.Username, balance);
 
             return Ok (created);
         }
 
-        [AllowAnonymous]
         [HttpGet ("get")]
         public IActionResult Get (int userId) {
             IList<Transaction> transactions = _transactionService.GetAll ().ToList ();
@@ -96,7 +92,6 @@ namespace WebApi.Controllers {
             return Ok (transactions);
         }
 
-        [AllowAnonymous]
         [HttpGet ("{id}")]
         public IActionResult GetById (int id) {
             var transaction = _transactionService.GetById (id);
@@ -140,13 +135,6 @@ namespace WebApi.Controllers {
             }
             return Ok (transactions.OrderByDescending(x => x.id));
         }
-
-        // [HttpGet ("{id}")]
-        // public IActionResult GetById (int id) {
-        //     var user = _userService.GetById (id);
-        //     var userDto = _mapper.Map<UserDto> (user);
-        //     return Ok (userDto);
-        // }
 
         [HttpPost ("CheckTransaction")]
         public IActionResult CheckTransaction (int userId, decimal amount) {

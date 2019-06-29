@@ -126,7 +126,7 @@ namespace WebApi.Controllers {
         [HttpGet ("getBalance/{id:int}")]
         [Route ("getBalance/{id:int}")]
         public IActionResult getBalance (int id) {
-            var balance = _userService.getBalanceForUser (id);
+            decimal balance = _userService.getBalanceForUser (id);
             return Ok (balance);
         }
 
@@ -142,7 +142,6 @@ namespace WebApi.Controllers {
             return Ok ("Message send.");
         }
 
-        [AllowAnonymous]
         [HttpPost ("verifyEmail")]
         public IActionResult verifyEmail (string email) {
             var user = _userService.GetAll ().ToList ().Where (x => x.Email == email).FirstOrDefault ();
