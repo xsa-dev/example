@@ -117,7 +117,7 @@ class HomePage extends React.Component {
                         disabled = {!user.isVerified}
                     />                    
                     <label>Amount</label>
-                    <input type="number" className="form-control" min="0" step="1" name="amount" value={amount} onChange={this.handleChange} onKeyUp={this.handleTransactionCheckBalance} disabled={!to}/>
+                    <input type="number" className="form-control" name="amount" value={amount} onChange={this.handleChange} onKeyUp={this.handleTransactionCheckBalance} disabled={!to}/>
                     <div className="p-3">                    
                         {balance_checked && to && <button className="btn btn-block" onClick={this.handleCreateTransaction}>Send</button>}    
                         {!balance_checked && to && <p>Type valid amount to send PW</p>}

@@ -9,12 +9,23 @@ export const transactionService = {
 }
 
 function createTransaction(from, to, sum) {
-    console.log('from: ' + from + ", to: "  + to + ", amount:" + sum);
+    console.log('from: ' + from + ", to: " + to + ", amount:" + sum);
+    
+    let transaction = {
+            fromId: from,
+            toId: to,
+            isValidated: true,
+            account: 0,
+            amount: sum        
+    }
     
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: "fromId=" + from + "&toId=" + to + "&amount=" + sum + "&state=true&account=0/"
+        headers: {
+                ... authHeader(),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(transaction)
     };
 
     return fetch(config.apiUrl + '/transactions/create', requestOptions)

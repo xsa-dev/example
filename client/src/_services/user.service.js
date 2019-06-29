@@ -99,7 +99,7 @@ function getBalance(userId) {
         headers: { ...authHeader(), 'Content-Type': 'application/json'},
         body: JSON.stringify(userId)
     };
-
+    
     return fetch(config.apiUrl + '/users/getBalance/' + userId, requestOptions).then(handleResponse, handleError);
 }
 
@@ -115,7 +115,7 @@ function sendVerificationCode(email) {
 function verifyCodeForUser(code, userId) {
     const requestOptions = {
         method: 'GET',
-        headers: authHeader()
+        headers: { ...authHeader() }
     };
 
     return fetch(config.apiUrl + '/Users/verifyEmailCode?code=' + code + '&userid=' + userId, requestOptions)
