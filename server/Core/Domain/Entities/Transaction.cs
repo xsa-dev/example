@@ -55,7 +55,6 @@ namespace WebApi.Core.Domain.Entities {
     }
 
     public enum Direction {
-        Null,
         Credit,
         Debit
     }

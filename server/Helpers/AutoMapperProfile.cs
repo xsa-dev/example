@@ -1,5 +1,4 @@
 using AutoMapper;
-using WebApi.Core.Domain.Dtos;
 using WebApi.Core.Domain.Entities;
 
 namespace WebApi.Helpers

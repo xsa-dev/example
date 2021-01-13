@@ -1,16 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using WebApi.Core.Domain.Dtos;
 using WebApi.Core.Domain.Entities;
 using WebApi.Core.Services;
 using WebApi.Helpers;

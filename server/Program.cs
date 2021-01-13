@@ -1,6 +1,6 @@
-﻿using System.IO;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace WebApi
 {
@@ -12,9 +12,14 @@ namespace WebApi
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)            
+            WebHost.CreateDefaultBuilder(args)     
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.AddConsole();
+                })
                 .UseStartup<Startup>()
-                .UseIIS()
+                .UseIISIntegration()
                 .Build();
     }
 }
