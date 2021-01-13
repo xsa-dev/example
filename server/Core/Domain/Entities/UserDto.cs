@@ -1,6 +1,5 @@
-namespace WebApi.Core.Domain.Dtos {
+namespace WebApi.Core.Domain.Entities {
     public class UserDto {
-        // this is view model
         public int Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }

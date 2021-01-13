@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using AutoMapper;
+using WebApi.Core.Domain.Entities;
 using WebApi.Core.Services;
 using WebApi.Helpers;
 using WebApi.Hubs;
@@ -21,18 +22,17 @@ namespace WebApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices (IServiceCollection services) {
             services.AddCors ();
-            // services.AddDbContext<DataContext> (x => x.UseInMemoryDatabase ("TestDb"));
-
-            services.AddMvc ();
-
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=ExampleContext1;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddMvc (
+                options => options.EnableEndpointRouting = false );
+            
+            var connection = @"Server=localhost,1433;Database=WebApi;ConnectRetryCount=0;User=sa;Password=ToPSG5!Rf";
+            
             services.AddDbContext<DataContext>
                 (options => options.UseSqlServer(connection));
 
-            services.AddAutoMapper ();
+            services.AddAutoMapper(typeof(UserDto));
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection ("AppSettings");
@@ -56,20 +56,17 @@ namespace WebApi
                     };
                 });
 
-            // configure DI for application services
             services.AddScoped<IUserService, UserService> ();
             services.AddScoped<ITransactionService, TransactionService> ();
             services.AddScoped<IEmailService, EmailService> ();
             services.AddSignalR ();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure (IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) {
-            //  loggerFactory.AddConsole (Configuration.GetSection ("Logging"));
-            //  loggerFactory.AddDebug ();
-
-            // global cors policy
+        public void Configure (IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        {
+            app.UseRouting();
+            
             app.UseCors (x => x
                 .AllowAnyMethod ()
                 .AllowAnyHeader ()
@@ -78,13 +75,17 @@ namespace WebApi
                 )
                 .AllowCredentials ()
             );
+            
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Ping}/{action=Pong}");
+                    endpoints.MapControllerRoute("default", "{controller=Ping}/{action=Pong}");
+                endpoints.MapHub<ChatHub>("/chatHub");
+            });
 
             app.UseAuthentication ();
-            app.UseSignalR (routes => {
-                routes.MapHub<ChatHub> ("/chatHub");
-            });
-            app.UseMvc ();
-
         }
     }
 }

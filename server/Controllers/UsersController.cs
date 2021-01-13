@@ -9,13 +9,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using WebApi.Core.Domain.Dtos;
 using WebApi.Core.Domain.Entities;
 using WebApi.Core.Services;
 using WebApi.Helpers;
 
 namespace WebApi.Controllers {
-    [Authorize]
+    // [Authorize]
     [Route ("[controller]")]
     public class UsersController : Controller {
         private IUserService _userService;
@@ -125,15 +124,15 @@ namespace WebApi.Controllers {
         // todo sinth ...
         [HttpGet ("getBalance/{id:int}")]
         [Route ("getBalance/{id:int}")]
-        public IActionResult getBalance (int id) {
+        public IActionResult GetBalance (int id) {
             decimal balance = _userService.getBalanceForUser (id);
             return Ok (balance);
         }
 
         [AllowAnonymous]
         [HttpGet ("resetPassword")]
-        public IActionResult resetPassword (string email) {
-            var user = _userService.GetAll ().ToList ().Where (x => x.Email == email).FirstOrDefault ();
+        public IActionResult ResetPassword (string email) {
+            var user = _userService.GetAll ().ToList ().FirstOrDefault (x => x.Email == email);
             if (user == null) {
                 return BadRequest ("User not found.");
             }
@@ -143,8 +142,8 @@ namespace WebApi.Controllers {
         }
 
         [HttpPost ("verifyEmail")]
-        public IActionResult verifyEmail (string email) {
-            var user = _userService.GetAll ().ToList ().Where (x => x.Email == email).FirstOrDefault ();
+        public IActionResult VerifyEmail (string email) {
+            var user = _userService.GetAll ().ToList ().FirstOrDefault (x => x.Email == email);
             if (user == null) {
                 return BadRequest ("User not found.");
             }
@@ -155,18 +154,18 @@ namespace WebApi.Controllers {
         }
 
         [HttpGet ("verifyEmailCode")]
-        public IActionResult verifyEmailCode (string code, int userid) {
-            var user = _userService.GetAll ().ToList ().Where (x => x.Id == userid).FirstOrDefault ();
+        public IActionResult VerifyEmailCode (string code, int userid) {
+            var user = _userService.GetAll ().ToList ().FirstOrDefault (x => x.Id == userid);
 
             if (user == null) {
                 return BadRequest ("User not found.");
             }
 
-            var selected_user = _userService.checkVerificationCode (code, user);
-            selected_user.PasswordHash = null;
-            selected_user.PasswordSalt = null;
+            var selectedUser = _userService.checkVerificationCode (code, user);
+            selectedUser.PasswordHash = null;
+            selectedUser.PasswordSalt = null;
 
-            return Ok (selected_user);
+            return Ok (selectedUser);
         }
     }
 }
